@@ -1,7 +1,8 @@
 import type React from "react";
 import type Candidate from "../interfaces/Candidate.interface";
-import { ImCross } from "react-icons/im"; // import { IoRemoveCircleSharp } from "react-icons/io5"; | <IoRemoveCircleSharp />
-import { CgPlayListAdd } from "react-icons/cg"; // import { MdAddCircle } from "react-icons/md"; | <MdAddCircle />
+import { ImCross } from "react-icons/im"; // TODO - defunct
+import { IoRemoveCircleSharp } from "react-icons/io5";
+import { MdAddCircle } from "react-icons/md";
 
 interface CandidateCardProps {
   currentCandidate: Candidate;
@@ -65,14 +66,16 @@ const CandidateCard = ({
             </article>
           ) : (
             <article className="icons">
-              <div>TODO</div>
-              <CgPlayListAdd
-                style={{ fontSize: "40px", cursor: "pointer" }}
-                onClick={() => addToSavedCandidateList?.()}
-              />
-              <ImCross
+              <div>TODO: fix the logic - this is the only article that should appear</div>
+              <IoRemoveCircleSharp
+                color="red"
                 style={{ fontSize: "40px", cursor: "pointer" }}
                 onClick={() => getRandomCandidate?.()}
+              />
+              <MdAddCircle
+               color="green"
+                style={{ fontSize: "40px", cursor: "pointer" }}
+                onClick={() => addToSavedCandidateList?.()}
               />
             </article>
           )}
