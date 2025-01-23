@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
-import { searchGithubUser } from "../api/API";
+import { searchGithub, searchGithubUser } from "../api/API";
 import Candidate from "../interfaces/Candidate.interface";
 import CandidateCard from "../components/CandidateCard";
 
 const CandidateSearch = () => {
   const [currentCandidate, setCurrentCandidate] = useState<Candidate>({
-    avatar: "",
-    candidateName: "",
-    username: "",
+    avatar_url: "",
+    name: "",
+    login: "",
     location: "",
     email: "",
     company: "",
@@ -16,27 +16,24 @@ const CandidateSearch = () => {
 
   // const addToSavedCandidateList = () => {};
 
-  const findGitHubUser = async () => {
-    const rawData = await searchGithubUser("clintsrc");
-    const mappedData: Candidate = {
-      avatar: rawData.avatar_url || null,
-      candidateName: rawData.name || null,
-      username: rawData.login || null,
-      location: rawData.location || null,
-      email: rawData.email || null,
-      company: rawData.company || null,
-      html_url: rawData.html_url || null,
+  useEffect(() => {
+    const getRandomCandidate = async () => {
+      try {
+        // Fetch a random batch of users
+        const usersBatch = await searchGithub();
+        if (usersBatch.length > 0) {
+          // Fetch detailed information for the first user in the batch
+          console.log("GOT HERE", usersBatch);
+          const userDetails = await searchGithubUser(usersBatch[0].login);
+          setCurrentCandidate(userDetails); // Update the state with the candidate details
+        }
+      } catch (error) {
+        console.error("Error fetching candidate data:", error);
+      }
     };
 
-    if (mappedData) {
-      setCurrentCandidate(mappedData);
-    }
-    console.log("Mapped and set currentCandidate:", mappedData);
-  };
-
-  useEffect(() => {
-    findGitHubUser(); // Triggered when the component mounts
-  }, []); // Empty dependency array ensures this runs once when the component mounts.
+    getRandomCandidate(); // Call the function to fetch data on mount
+  }, []); // Empty dependency array ensures this runs only once when the component
 
   return (
     <>

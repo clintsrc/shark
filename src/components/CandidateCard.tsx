@@ -3,7 +3,7 @@ import type Candidate from "../interfaces/Candidate.interface";
 import { ImCross } from "react-icons/im"; // import { IoRemoveCircleSharp } from "react-icons/io5"; | <IoRemoveCircleSharp />
 import { CgPlayListAdd } from "react-icons/cg"; // import { MdAddCircle } from "react-icons/md"; | <MdAddCircle />
 
-type CandidateCardProps = {
+interface CandidateCardProps {
   currentCandidate: Candidate;
   addToSavedCandidates?: (() => void) | null;
   onSavedCandidatesList?: boolean | null;
@@ -14,7 +14,7 @@ type CandidateCardProps = {
         candidatName: string | null
       ) => void)
     | null;
-};
+}
 
 const CandidateCard = ({
   currentCandidate,
@@ -24,16 +24,16 @@ const CandidateCard = ({
 }: CandidateCardProps) => {
   return (
     <>
-      {currentCandidate?.candidateName ? (
+      {currentCandidate?.login ? (
         <section className="currentCandidate">
           <article className="details">
             <div>
 
             <div className="image-container">
             <img
-              src={currentCandidate.avatar ?? ''} alt={`${currentCandidate.candidateName}'s avatar`} />
+              src={currentCandidate.avatar_url ?? ''} alt={`${currentCandidate.name}'s avatar`} />
             </div>
-              {currentCandidate.candidateName} ({currentCandidate.username})<br/>
+              {currentCandidate.name} ({currentCandidate.login})<br/>
               Location: {currentCandidate.location}<br/>
               Email: <a href={`mailto:${currentCandidate.email}`}>{currentCandidate.email}</a><br/>
               Company: {currentCandidate.company}<br/>
@@ -48,7 +48,7 @@ const CandidateCard = ({
                   removeFromStorage?.(
                     e,
                     onSavedCandidatesList,
-                    currentCandidate.candidateName
+                    currentCandidate.name
                   )
                 }
               />
@@ -63,7 +63,7 @@ const CandidateCard = ({
           )}
         </section>
       ) : (
-        <h2>GitHub API error</h2>
+        <h2>Finding a candidate...</h2>
       )}
     </>
   );
