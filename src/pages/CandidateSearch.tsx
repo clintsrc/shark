@@ -25,13 +25,24 @@ const CandidateSearch = () => {
       const usersBatch: { login: string }[] = await searchGithub();
       if (Array.isArray(usersBatch) && usersBatch.length > 0) {
         // Fetch detailed information for the first user in the batch
-        console.log("GOT HERE", usersBatch);
         const userDetails = await searchGithubUser(usersBatch[0].login);
         setCurrentCandidate(userDetails); // Update the state with the candidate details
       }
     } catch (error) {
       console.error("Error fetching candidate data:", error);
     }
+  };
+
+
+  /*
+   * Providing a wrapper because React doesn't know how to handle an async 
+   * function in an inline event handler where it expects a void-returning function
+   * 
+   */
+  const handleFetchNewCandidate = () => {
+    getRandomCandidate().catch((error) =>
+      console.error("Error in handleFetchNewCandidate:", error)
+    );
   };
 
   // Fetch the first candidate when the component mounts
@@ -46,10 +57,10 @@ const CandidateSearch = () => {
       <h1>Candidate Search</h1>
       <section id="searchSection"></section>{" "}
       {/* This section no longer relies on onLoad */}
-      <CandidateCard 
-      currentCandidate={currentCandidate} 
-      addToSavedCandidateList={addToSavedCandidateList}
-      getRandomCandidate={getRandomCandidate}
+      <CandidateCard
+        currentCandidate={currentCandidate}
+        addToSavedCandidateList={addToSavedCandidateList}
+        getRandomCandidate={handleFetchNewCandidate}
       />
     </>
   );

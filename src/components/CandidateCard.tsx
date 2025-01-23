@@ -1,6 +1,5 @@
 import type React from "react";
 import type Candidate from "../interfaces/Candidate.interface";
-import { ImCross } from "react-icons/im"; // TODO - defunct
 import { IoRemoveCircleSharp } from "react-icons/io5";
 import { MdAddCircle } from "react-icons/md";
 
@@ -21,9 +20,7 @@ interface CandidateCardProps {
 const CandidateCard = ({
   currentCandidate,
   addToSavedCandidateList,
-  onSavedCandidatesList,
   getRandomCandidate,
-  removeFromStorage,
 }: CandidateCardProps) => {
   return (
     <>
@@ -51,20 +48,7 @@ const CandidateCard = ({
               <br />
             </div>
           </article>
-          {onSavedCandidatesList ? (
-            <article className="icons">
-              <ImCross
-                style={{ fontSize: "40px", cursor: "pointer" }}
-                onClick={(e: React.MouseEvent<SVGSVGElement, MouseEvent>) =>
-                  removeFromStorage?.(
-                    e,
-                    onSavedCandidatesList,
-                    currentCandidate.name
-                  )
-                }
-              />
-            </article>
-          ) : (
+  
             <article className="icons">
               <div>TODO: fix the logic - this is the only article that should appear</div>
               <IoRemoveCircleSharp
@@ -78,7 +62,7 @@ const CandidateCard = ({
                 onClick={() => addToSavedCandidateList?.()}
               />
             </article>
-          )}
+
         </section>
       ) : (
         <h2>Finding a candidate...</h2>
