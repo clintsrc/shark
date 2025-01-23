@@ -33,11 +33,10 @@ const CandidateSearch = () => {
     }
   };
 
-
   /*
-   * Providing a wrapper because React doesn't know how to handle an async 
+   * Providing a wrapper because React doesn't know how to handle an async
    * function in an inline event handler where it expects a void-returning function
-   * 
+   *
    */
   const handleFetchNewCandidate = () => {
     getRandomCandidate().catch((error) =>

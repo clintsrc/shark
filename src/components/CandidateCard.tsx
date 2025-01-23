@@ -44,25 +44,33 @@ const CandidateCard = ({
               <br />
               Company: {currentCandidate.company}
               <br />
-              GitHub: {currentCandidate.html_url}
+              GitHub:{" "}
+              <a
+                href={currentCandidate.html_url ?? "#"}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {currentCandidate.html_url ?? "N/A"}
+              </a>
               <br />
             </div>
           </article>
-  
-            <article className="icons">
-              <div>TODO: fix the logic - this is the only article that should appear</div>
-              <IoRemoveCircleSharp
-                color="red"
-                style={{ fontSize: "40px", cursor: "pointer" }}
-                onClick={() => getRandomCandidate?.()}
-              />
-              <MdAddCircle
-               color="green"
-                style={{ fontSize: "40px", cursor: "pointer" }}
-                onClick={() => addToSavedCandidateList?.()}
-              />
-            </article>
 
+          <article className="icons">
+            <div>
+              TODO: fix the logic - this is the only article that should appear
+            </div>
+            <IoRemoveCircleSharp
+              color="red"
+              style={{ fontSize: "40px", cursor: "pointer" }}
+              onClick={() => getRandomCandidate?.()}
+            />
+            <MdAddCircle
+              color="green"
+              style={{ fontSize: "40px", cursor: "pointer" }}
+              onClick={() => addToSavedCandidateList?.()}
+            />
+          </article>
         </section>
       ) : (
         <h2>Finding a candidate...</h2>
