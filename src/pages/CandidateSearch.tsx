@@ -14,24 +14,28 @@ const CandidateSearch = () => {
     html_url: "",
   });
 
-  // const addToSavedCandidateList = () => {};
+  const addToSavedCandidateList = () => {
+    alert("got here");
+  };
 
-  useEffect(() => {
-    const getRandomCandidate = async () => {
-      try {
-        // Fetch a random batch of users
-        const usersBatch: { login: string }[] = await searchGithub();
-        if (Array.isArray(usersBatch) && usersBatch.length > 0) {
-          // Fetch detailed information for the first user in the batch
-          console.log("GOT HERE", usersBatch);
-          const userDetails = await searchGithubUser(usersBatch[0].login);
-          setCurrentCandidate(userDetails); // Update the state with the candidate details
-        }
-      } catch (error) {
-        console.error("Error fetching candidate data:", error);
+  // Define getRandomCandidate outside of useEffect for reusability
+  const getRandomCandidate = async () => {
+    try {
+      // Fetch a random batch of users
+      const usersBatch: { login: string }[] = await searchGithub();
+      if (Array.isArray(usersBatch) && usersBatch.length > 0) {
+        // Fetch detailed information for the first user in the batch
+        console.log("GOT HERE", usersBatch);
+        const userDetails = await searchGithubUser(usersBatch[0].login);
+        setCurrentCandidate(userDetails); // Update the state with the candidate details
       }
-    };
+    } catch (error) {
+      console.error("Error fetching candidate data:", error);
+    }
+  };
 
+  // Fetch the first candidate when the component mounts
+  useEffect(() => {
     getRandomCandidate().catch((error) =>
       console.error("Error in getRandomCandidate:", error)
     ); // Call the function to fetch data on mount
@@ -42,7 +46,11 @@ const CandidateSearch = () => {
       <h1>Candidate Search</h1>
       <section id="searchSection"></section>{" "}
       {/* This section no longer relies on onLoad */}
-      <CandidateCard currentCandidate={currentCandidate} />
+      <CandidateCard 
+      currentCandidate={currentCandidate} 
+      addToSavedCandidateList={addToSavedCandidateList}
+      getRandomCandidate={getRandomCandidate}
+      />
     </>
   );
 };

@@ -5,8 +5,9 @@ import { CgPlayListAdd } from "react-icons/cg"; // import { MdAddCircle } from "
 
 interface CandidateCardProps {
   currentCandidate: Candidate;
-  addToSavedCandidates?: (() => void) | null;
+  addToSavedCandidateList?: (() => void) | null;
   onSavedCandidatesList?: boolean | null;
+  getRandomCandidate?: (() => void) | null;
   removeFromStorage?:
     | ((
         e: React.MouseEvent<SVGSVGElement, MouseEvent>,
@@ -18,8 +19,9 @@ interface CandidateCardProps {
 
 const CandidateCard = ({
   currentCandidate,
-  addToSavedCandidates,
+  addToSavedCandidateList,
   onSavedCandidatesList,
+  getRandomCandidate,
   removeFromStorage,
 }: CandidateCardProps) => {
   return (
@@ -28,16 +30,24 @@ const CandidateCard = ({
         <section className="currentCandidate">
           <article className="details">
             <div>
-
-            <div className="image-container">
-            <img
-              src={currentCandidate.avatar_url ?? ''} alt={`${currentCandidate.name}'s avatar`} />
-            </div>
-              {currentCandidate.name} ({currentCandidate.login})<br/>
-              Location: {currentCandidate.location}<br/>
-              Email: <a href={`mailto:${currentCandidate.email}`}>{currentCandidate.email}</a><br/>
-              Company: {currentCandidate.company}<br/>
-              GitHub: {currentCandidate.html_url}<br/>
+              <div className="image-container">
+                <img
+                  src={currentCandidate.avatar_url ?? ""}
+                  alt={`${currentCandidate.name}'s avatar`}
+                />
+              </div>
+              {currentCandidate.name} ({currentCandidate.login})<br />
+              Location: {currentCandidate.location}
+              <br />
+              Email:{" "}
+              <a href={`mailto:${currentCandidate.email}`}>
+                {currentCandidate.email}
+              </a>
+              <br />
+              Company: {currentCandidate.company}
+              <br />
+              GitHub: {currentCandidate.html_url}
+              <br />
             </div>
           </article>
           {onSavedCandidatesList ? (
@@ -55,9 +65,14 @@ const CandidateCard = ({
             </article>
           ) : (
             <article className="icons">
+              <div>TODO</div>
               <CgPlayListAdd
                 style={{ fontSize: "40px", cursor: "pointer" }}
-                onClick={() => addToSavedCandidates?.()}
+                onClick={() => addToSavedCandidateList?.()}
+              />
+              <ImCross
+                style={{ fontSize: "40px", cursor: "pointer" }}
+                onClick={() => getRandomCandidate?.()}
               />
             </article>
           )}
