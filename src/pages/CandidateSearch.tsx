@@ -20,8 +20,8 @@ const CandidateSearch = () => {
     const getRandomCandidate = async () => {
       try {
         // Fetch a random batch of users
-        const usersBatch = await searchGithub();
-        if (usersBatch.length > 0) {
+        const usersBatch: { login: string }[] = await searchGithub();
+        if (Array.isArray(usersBatch) && usersBatch.length > 0) {
           // Fetch detailed information for the first user in the batch
           console.log("GOT HERE", usersBatch);
           const userDetails = await searchGithubUser(usersBatch[0].login);
@@ -32,7 +32,9 @@ const CandidateSearch = () => {
       }
     };
 
-    getRandomCandidate(); // Call the function to fetch data on mount
+    getRandomCandidate().catch((error) =>
+      console.error("Error in getRandomCandidate:", error)
+    ); // Call the function to fetch data on mount
   }, []); // Empty dependency array ensures this runs only once when the component
 
   return (
