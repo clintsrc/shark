@@ -27,15 +27,17 @@ const CandidateCard = ({
       {currentCandidate?.candidateName ? (
         <section className="currentCandidate">
           <article className="details">
-            <h2>{currentCandidate.candidateName}</h2>
             <div>
-              {currentCandidate.avatar}
-              {currentCandidate.candidateName}
-              {currentCandidate.username}
-              {currentCandidate.location}
-              {currentCandidate.email}
-              {currentCandidate.company}
-              {currentCandidate.html_url}
+
+            <div className="image-container">
+            <img
+              src={currentCandidate.avatar ?? ''} alt={`${currentCandidate.candidateName}'s avatar`} />
+            </div>
+              {currentCandidate.candidateName} ({currentCandidate.username})<br/>
+              Location: {currentCandidate.location}<br/>
+              Email: <a href={`mailto:${currentCandidate.email}`}>{currentCandidate.email}</a><br/>
+              Company: {currentCandidate.company}<br/>
+              GitHub: {currentCandidate.html_url}<br/>
             </div>
           </article>
           {onSavedCandidatesList ? (
@@ -61,7 +63,7 @@ const CandidateCard = ({
           )}
         </section>
       ) : (
-        <h2>test</h2>
+        <h2>TODO</h2>
       )}
     </>
   );

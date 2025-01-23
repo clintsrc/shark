@@ -21,13 +21,13 @@ THEN the next candidate's information should be displayed without saving the cur
 */
 
 interface Candidate {
-    avatar: string | null; 
-    candidateName: string | null; 
-    username: string | null; 
-    location: string | null; 
-    email: string | null; 
-    company: string | null; 
-    html_url: string | null; 
+    avatar: string | null; // "avatar_url": "https://avatars.githubusercontent.com/u/179427740?v=4",
+    candidateName: string | null; // "name": "Clint Jones",
+    username: string | null; // "login": "clintsrc",
+    location: string | null; // "location": "Tigard, OR USA",
+    email: string | null; // "email": null,
+    company: string | null; // "company": null,
+    html_url: string | null; // "html_url": "https://github.com/clintsrc",
 }
 
 export default Candidate;

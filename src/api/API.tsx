@@ -1,3 +1,13 @@
+/*
+ * searchGithub()
+ *
+ * Use the github api to fetch a batch of users from GitHub.
+ * The selection is determined by generating a random user ID. the API uses
+ * that user's ID as the ${start} of the selection, and includes the users created after 
+ * that one.
+ * 
+ */
+
 const searchGithub = async () => {
   try {
     const start = Math.floor(Math.random() * 100000000) + 1;
@@ -15,13 +25,21 @@ const searchGithub = async () => {
     if (!response.ok) {
       throw new Error('invalid API response, check the network tab');
     }
-    // console.log('Data:', data);
+     console.log('Data:', data);
     return data;
   } catch (err) {
     // console.log('an error occurred', err);
     return [];
   }
 };
+
+/*
+ * searchGithubUser()
+ *
+ * Use the github api to fetch information about a specific user, specified
+ * by the ${username}
+ * 
+ */
 
 const searchGithubUser = async (username: string) => {
   try {
