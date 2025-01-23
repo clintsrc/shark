@@ -63,7 +63,7 @@ const CandidateCard = ({
           )}
         </section>
       ) : (
-        <h2>TODO</h2>
+        <h2>GitHub API error</h2>
       )}
     </>
   );
