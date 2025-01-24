@@ -49,13 +49,15 @@ const CandidateSearch = () => {
             }
           })
         );
-
-        // Filter out any null responses from failed fetches
-        const validCandidates = detailedUsers.filter((user) => user !== null);
-
-        setCandidatesBatch(validCandidates);
+  
+        // Filter out invalid candidates (those with no login)
+        const validCandidates = detailedUsers.filter(
+          (user) => user?.login
+        );
+  
+        setCandidatesBatch(validCandidates.filter((candidate): candidate is Candidate => candidate !== null));
         setCurrentIndex(0);
-        setCurrentCandidate(validCandidates[0] || null);
+        setCurrentCandidate(validCandidates[0] ?? null);
       } else {
         // Handle case where no users are returned
         setCandidatesBatch([]);
@@ -64,7 +66,7 @@ const CandidateSearch = () => {
     } catch (error) {
       console.error("Error fetching candidate batch:", error);
     }
-  };
+  };  
 
   /*
    * Navigate throught the candidates and track when the last candidate is reached

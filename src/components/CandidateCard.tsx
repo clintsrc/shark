@@ -59,7 +59,7 @@ const CandidateCard = ({
         <p>No more candidates are available</p>
       )}
       <br />
-      {!isSaved && (
+      {!isSaved && currentCandidate && (
         <>
           <IoRemoveCircleSharp
             color="red"
