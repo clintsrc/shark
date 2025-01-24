@@ -6,7 +6,7 @@ interface CandidateCardProps {
   currentCandidate: Candidate | null;
   addToSavedCandidateList?: () => void; // Optional for saved candidates
   getRandomCandidate?: () => void; // Optional for saved candidates
-  isSaved?: boolean; // Indicates if this card is for a saved candidate
+  isSaved?: boolean; // Indicates whether this card is for a saved candidate
 }
 
 const CandidateCard = ({
@@ -30,7 +30,8 @@ const CandidateCard = ({
             alt={`${currentCandidate.name}'s avatar`}
           />
           <h2>
-            {currentCandidate.login} {currentCandidate.name ? `(${currentCandidate.name})` : ""}
+            {currentCandidate.login}{" "}
+            {currentCandidate.name ? `(${currentCandidate.name})` : ""}
           </h2>
           <p>Location: {currentCandidate.location ?? ""}</p>
           <p>
