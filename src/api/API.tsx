@@ -7,6 +7,9 @@ import type Candidate from "../interfaces/Candidate.interface";
  * The selection is determined by generating a random user ID. the API uses
  * that user's ID as the ${start} of the selection, and includes the users created after
  * that one.
+ * 
+ * It uses the default, returning 30 users (per_page)
+ * ref: https://docs.github.com/en/rest/users/users?apiVersion=2022-11-28#list-users
  *
  */
 const searchGithub = async (): Promise<{ login: string }[]> => {
@@ -28,6 +31,7 @@ const searchGithub = async (): Promise<{ login: string }[]> => {
     if (!response.ok) {
       throw new Error("invalid API response, check the network tab");
     }
+    console.log("Data size:", data.length);
     console.log("Data:", data);
     return data;
   } catch (err) {
@@ -41,6 +45,8 @@ const searchGithub = async (): Promise<{ login: string }[]> => {
  *
  * Use the github api to fetch information about a specific user, specified
  * by the ${username}
+ * 
+ * ref: https://docs.github.com/en/rest/users/users#get-a-user
  *
  */
 
