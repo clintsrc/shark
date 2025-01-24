@@ -31,8 +31,7 @@ const searchGithub = async (): Promise<{ login: string }[]> => {
     if (!response.ok) {
       throw new Error("invalid API response, check the network tab");
     }
-    console.log("Data size:", data.length);
-    console.log("Data:", data);
+    console.log("searchGithub Data:", data);
     return data;
   } catch (err) {
     // console.log('an error occurred', err);
@@ -61,6 +60,7 @@ const searchGithubUser = async (username: string): Promise<Candidate> => {
     if (!response.ok) {
       throw new Error("invalid API response, check the network tab");
     }
+    console.log("searchGithubUser Data:", data);
     return data;
   } catch (err) {
     // console.log('an error occurred', err);

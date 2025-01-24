@@ -28,20 +28,36 @@ const CandidateSearch = () => {
   /*
    * Fetch a batch of candidates using the GitHub API
    * Display the first candidate
-   * 
+   *
    */
   const getRandomCandidateBatch = async () => {
     try {
+      // Fetch a random batch of users
       const usersBatch: { login: string }[] = await searchGithub();
       if (Array.isArray(usersBatch) && usersBatch.length > 0) {
+        // Fetch detailed information for each user in the batch
         const detailedUsers = await Promise.all(
-          usersBatch.map((user) => searchGithubUser(user.login))
+          usersBatch.map(async (user) => {
+            try {
+              return await searchGithubUser(user.login);
+            } catch (error) {
+              console.error(
+                `Error fetching details for user ${user.login}:`,
+                error
+              );
+              return null;
+            }
+          })
         );
-        // store the batch in the candidatesBatch state
-        setCandidatesBatch(detailedUsers);
+
+        // Filter out any null responses from failed fetches
+        const validCandidates = detailedUsers.filter((user) => user !== null);
+
+        setCandidatesBatch(validCandidates);
         setCurrentIndex(0);
-        setCurrentCandidate(detailedUsers[0]);
+        setCurrentCandidate(validCandidates[0] || null);
       } else {
+        // Handle case where no users are returned
         setCandidatesBatch([]);
         setCurrentCandidate(null);
       }
@@ -64,7 +80,7 @@ const CandidateSearch = () => {
   };
 
   /*
-   * When Add is clicked for the current candidate, add to localStorage then advance 
+   * When Add is clicked for the current candidate, add to localStorage then advance
    * to the next
    *
    */
