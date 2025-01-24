@@ -1,20 +1,11 @@
-import type React from "react";
 import type Candidate from "../interfaces/Candidate.interface";
 import { IoRemoveCircleSharp } from "react-icons/io5";
 import { MdAddCircle } from "react-icons/md";
 
 interface CandidateCardProps {
-  currentCandidate: Candidate;
+  currentCandidate: Candidate | null;
   addToSavedCandidateList?: (() => void) | null;
-  onSavedCandidatesList?: boolean | null;
   getRandomCandidate?: (() => void) | null;
-  removeFromStorage?:
-    | ((
-        e: React.MouseEvent<SVGSVGElement, MouseEvent>,
-        currentlyOnCandidateList: boolean | null | undefined,
-        candidatName: string | null
-      ) => void)
-    | null;
 }
 
 const CandidateCard = ({
@@ -24,7 +15,7 @@ const CandidateCard = ({
 }: CandidateCardProps) => {
   return (
     <>
-      {currentCandidate?.login ? (
+      {currentCandidate ? (
         <section className="currentCandidate">
           <article className="details">
             <div>
@@ -57,9 +48,6 @@ const CandidateCard = ({
           </article>
 
           <article className="icons">
-            <div>
-              TODO: fix the logic - this is the only article that should appear
-            </div>
             <IoRemoveCircleSharp
               color="red"
               style={{ fontSize: "40px", cursor: "pointer" }}
@@ -73,7 +61,7 @@ const CandidateCard = ({
           </article>
         </section>
       ) : (
-        <h2>Finding a candidate...</h2>
+        <h2>No more candidates available.</h2>
       )}
     </>
   );
