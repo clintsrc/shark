@@ -15,7 +15,17 @@ const CandidateSearch = () => {
   });
 
   const addToSavedCandidateList = () => {
-    alert("got here");
+    try {
+      const savedCandidates: Candidate[] = JSON.parse(
+        localStorage.getItem("savedCandidates") ?? "[]"
+      ) as Candidate[];
+      savedCandidates.push(currentCandidate);
+      localStorage.setItem("savedCandidates", JSON.stringify(savedCandidates));
+    } catch (error) {
+      console.error("Error saving candidate:", error);
+      alert("Failed to save the candidate."); // TODO: find a better way than using a modal!
+    }
+    handleFetchNewCandidate();
   };
 
   // Define getRandomCandidate outside of useEffect for reusability
