@@ -36,6 +36,14 @@
  * THEN the next candidate's information should be displayed without saving the current
  * candidate
  *
+ * ********************************
+ * Bonus
+ * 
+ * Fulfilling any of the following can add up to 10 points to your grade. Note that 
+ * the highest grade you can achieve is still 100:
+ *  Application contains functionality to sort potential candidates (5 points).
+ *  Application contains functionality to filter potential candidates (5 points).
+ *
  */
 
 interface Candidate {
@@ -46,6 +54,7 @@ interface Candidate {
   email: string | null; // "email": null,
   company: string | null; // "company": null,
   html_url: string | null; // "html_url": "https://github.com/clintsrc",
+  bio: string | null; // "bio": null,
 }
 
 export default Candidate;

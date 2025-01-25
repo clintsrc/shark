@@ -72,6 +72,7 @@ const searchGithubUser = async (username: string): Promise<Candidate> => {
       email: "",
       company: "",
       html_url: "",
+      bio: "",
     };
   }
 };

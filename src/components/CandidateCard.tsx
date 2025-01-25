@@ -55,6 +55,7 @@ const CandidateCard = ({
               {currentCandidate.html_url ?? "N/A"}
             </a>
           </p>
+          <p>Bio: {currentCandidate.bio ?? ""}</p>
         </>
       ) : (
         <p>No more candidates are available</p>
