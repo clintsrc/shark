@@ -1,0 +1,18 @@
+/* Controls */
+.controls-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+/* Filter */
+.controls-container input {
+  padding: 5px;
+}
+
+/* Sort */
+.controls-container button {
+  padding: 8px 12px;
+  font-size: 16px;
+}

@@ -15,27 +15,18 @@ const CandidateSearch = () => {
     null
   );
 
-  /*
-   * fetch a batch of candidates when the component mounts
-   *
-   */
+  // fetch a batch of candidates when the component mounts
   useEffect(() => {
     getRandomCandidateBatch().catch((error) =>
       console.error("Error in getRandomCandidateBatch:", error)
     );
-  }, []); // Empty dependencies: run only once on mount
+  }, []); // Empty dependencies: run once on mount
 
-  /*
-   * Fetch a batch of candidates using the GitHub API
-   * Display the first candidate
-   *
-   */
+  // Fetch a batch of candidates using the GitHub API
   const getRandomCandidateBatch = async () => {
     try {
-      // Fetch a random batch of users
       const usersBatch: { login: string }[] = await searchGithub();
       if (Array.isArray(usersBatch) && usersBatch.length > 0) {
-        // Fetch detailed information for each user in the batch
         const detailedUsers = await Promise.all(
           usersBatch.map(async (user) => {
             try {
@@ -49,29 +40,25 @@ const CandidateSearch = () => {
             }
           })
         );
-  
-        // Filter out invalid candidates (those with no login)
-        const validCandidates = detailedUsers.filter(
-          (user) => user?.login
+
+        const validCandidates = detailedUsers.filter((user) => user?.login);
+        setCandidatesBatch(
+          validCandidates.filter(
+            (candidate): candidate is Candidate => candidate !== null
+          )
         );
-  
-        setCandidatesBatch(validCandidates.filter((candidate): candidate is Candidate => candidate !== null));
         setCurrentIndex(0);
         setCurrentCandidate(validCandidates[0] ?? null);
       } else {
-        // Handle case where no users are returned
         setCandidatesBatch([]);
         setCurrentCandidate(null);
       }
     } catch (error) {
       console.error("Error fetching candidate batch:", error);
     }
-  };  
+  };
 
-  /*
-   * Navigate throught the candidates and track when the last candidate is reached
-   *
-   */
+  // Navigate through the candidates and track when the last candidate is reached
   const handleNextCandidate = () => {
     if (currentIndex + 1 < candidatesBatch.length) {
       setCurrentIndex((prevIndex) => prevIndex + 1);
@@ -82,8 +69,9 @@ const CandidateSearch = () => {
   };
 
   /*
-   * When Add is clicked for the current candidate, add to localStorage then advance
-   * to the next
+   *
+   * When Add is clicked for the current candidate, add to localStorage then
+   * advance to the next
    *
    */
   const addToSavedCandidateList = () => {

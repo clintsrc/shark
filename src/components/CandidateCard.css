@@ -1,0 +1,19 @@
+/* CandidateCard.css */
+.candidate-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.candidate-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.candidate-card {
+  padding: 20px;
+  border: 1px solid #ccc;
+  margin: 10px;
+  border-radius: 8px;
+  background-color: black;
+}

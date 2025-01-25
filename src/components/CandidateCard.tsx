@@ -1,12 +1,13 @@
 import Candidate from "../interfaces/Candidate.interface";
 import { IoRemoveCircleSharp } from "react-icons/io5";
 import { MdAddCircle } from "react-icons/md";
+import "./CandidateCard.css";
 
 interface CandidateCardProps {
   currentCandidate: Candidate | null;
-  addToSavedCandidateList?: () => void; // Optional for saved candidates
-  getRandomCandidate?: () => void; // Optional for saved candidates
-  isSaved?: boolean; // Indicates whether this card is for a saved candidate
+  addToSavedCandidateList?: () => void; 
+  getRandomCandidate?: () => void; 
+  isSaved?: boolean; 
 }
 
 const CandidateCard = ({
@@ -18,7 +19,7 @@ const CandidateCard = ({
   return (
     <div className="candidate-card">
       {currentCandidate ? (
-        <>
+        <div className="candidate-info">
           <img
             style={{
               width: "150px",
@@ -29,34 +30,26 @@ const CandidateCard = ({
             src={currentCandidate.avatar_url ?? ""}
             alt={`${currentCandidate.name}'s avatar`}
           />
-          <h2>
-            {currentCandidate.login}{" "}
-            {currentCandidate.name ? `(${currentCandidate.name})` : ""}
-          </h2>
-          <p>Location: {currentCandidate.location ?? ""}</p>
-          <p>
-            Email:{" "}
-            {currentCandidate.email ? (
-              <a href={`mailto:${currentCandidate.email}`}>
-                {currentCandidate.email}
-              </a>
-            ) : (
-              ""
-            )}
-          </p>
-          <p>Company: {currentCandidate.company ?? ""}</p>
-          <p>
-            GitHub:{" "}
-            <a
-              href={currentCandidate.html_url ?? "#"}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {currentCandidate.html_url ?? "N/A"}
-            </a>
-          </p>
-          <p>Bio: {currentCandidate.bio ?? ""}</p>
-        </>
+          <div className="candidate-details">
+            <h2>
+              {currentCandidate.login}{" "}
+              {currentCandidate.name ? `(${currentCandidate.name})` : ""}
+            </h2>
+            <p>Location: {currentCandidate.location ?? ""}</p>
+            <p>
+              Email:{" "}
+              {currentCandidate.email ? (
+                <a href={`mailto:${currentCandidate.email}`}>
+                  {currentCandidate.email}
+                </a>
+              ) : (
+                ""
+              )}
+            </p>
+            <p>Company: {currentCandidate.company ?? ""}</p>
+            <p>Bio: {currentCandidate.bio ?? ""}</p>
+          </div>
+        </div>
       ) : (
         <p>No more candidates are available</p>
       )}
@@ -64,13 +57,11 @@ const CandidateCard = ({
       {!isSaved && currentCandidate && (
         <>
           <IoRemoveCircleSharp
-            color="red"
-            style={{ fontSize: "40px", cursor: "pointer" }}
+            className="button-icon reject-button"
             onClick={() => getRandomCandidate?.()}
           />
           <MdAddCircle
-            color="green"
-            style={{ fontSize: "40px", cursor: "pointer" }}
+            className="button-icon add-button"
             onClick={() => addToSavedCandidateList?.()}
           />
         </>
