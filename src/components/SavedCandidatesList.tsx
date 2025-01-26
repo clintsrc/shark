@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import type Candidate from "../interfaces/Candidate.interface";
 
-/* icons */
+/* react icons */
 import { IoRemoveCircleSharp } from "react-icons/io5";
 import { FaSortAmountUp, FaSortAmountDown } from "react-icons/fa";
 
@@ -43,27 +43,37 @@ const SavedCandidatesList = () => {
     setFilterText(filterValue);
   };
 
-  const sortCandidates = (order: "asc" | "desc") => {
-    const filteredCandidates = savedCandidates.filter((candidate) =>
-      candidate.login?.toLowerCase().includes(filterText.toLowerCase())
-    );
+  /*
+   * Memoize: cache the list for reuse. This helps avoid unnecessary re-renders.
+   * useCallback() memoizes a method instead of a value. The function won't be
+   * recreated unless the array dependency changes
+   *
+   */
+  const sortCandidates = useCallback(
+    (order: "asc" | "desc") => {
+      const filteredCandidates = savedCandidates.filter((candidate) =>
+        candidate.bio?.toLowerCase().includes(filterText.toLowerCase())
+      );
 
-    const sortedArray = [...filteredCandidates];
-    sortedArray.sort((a, b) => {
-      const compareResult = (a.login ?? "").localeCompare(b.login ?? "");
-      return order === "asc" ? compareResult : -compareResult;
-    });
+      const sortedArray = [...filteredCandidates];
+      sortedArray.sort((a, b) => {
+        const compareResult = (a.login ?? "").localeCompare(b.login ?? "");
+        return order === "asc" ? compareResult : -compareResult;
+      });
 
-    setSortedCandidates(sortedArray);
-  };
+      setSortedCandidates(sortedArray);
+    },
+    [savedCandidates, filterText]
+  );
 
   useEffect(() => {
     sortCandidates(sortOrder);
-  }, [filterText, sortOrder, savedCandidates]);
+  }, [filterText, sortOrder, savedCandidates, sortCandidates]);
 
   return (
     <div>
-      {savedCandidates.length > 0 && (
+      
+      {savedCandidates.length > 0 && sortedCandidates.length > 0 && (
         <div className="controls-container">
           <div>
             <label htmlFor="bio-filter">Filter on bio: </label>
