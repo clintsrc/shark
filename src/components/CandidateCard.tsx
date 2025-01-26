@@ -22,11 +22,17 @@ const CandidateCard = ({
         {currentCandidate ? (
           <>
             <div className="candidate-info">
-              <img
-                className="candidate-image"
-                src={currentCandidate.avatar_url ?? ""}
-                alt={`${currentCandidate.name}'s avatar`}
-              />
+              <a
+                href={currentCandidate.html_url ?? ""}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img
+                  className="candidate-image"
+                  src={currentCandidate.avatar_url ?? ""}
+                  alt={`${currentCandidate.name}'s avatar`}
+                />
+              </a>
             </div>
             <div className="candidate-details">
               <h2>

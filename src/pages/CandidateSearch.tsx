@@ -83,7 +83,6 @@ const CandidateSearch = () => {
       localStorage.setItem("savedCandidates", JSON.stringify(savedCandidates));
     } catch (error) {
       console.error("Error saving candidate:", error);
-      alert("Failed to save the candidate."); // TODO: find a better way than using a modal!
     }
     handleNextCandidate();
   };

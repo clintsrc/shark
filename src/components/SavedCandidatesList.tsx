@@ -102,16 +102,22 @@ const SavedCandidatesList = () => {
             {sortedCandidates.map((candidate) => (
               <tr key={candidate.login}>
                 <td className="cell-graphic">
-                  <img
-                    src={candidate.avatar_url ?? ""}
-                    alt={`${candidate.name}'s avatar`}
-                    style={{
-                      width: "50px",
-                      height: "50px",
-                      objectFit: "cover",
-                      borderRadius: "50%",
-                    }}
-                  />
+                  <a
+                    href={candidate.html_url ?? ""}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <img
+                      src={candidate.avatar_url ?? ""}
+                      alt={`${candidate.name}'s avatar`}
+                      style={{
+                        width: "50px",
+                        height: "50px",
+                        objectFit: "cover",
+                        borderRadius: "50%",
+                      }}
+                    />
+                  </a>
                 </td>
                 <td>
                   {candidate.login} ({candidate.name ?? "N/A"})
