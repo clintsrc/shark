@@ -1,81 +1,79 @@
-import type React from "react";
-import type Candidate from "../interfaces/Candidate.interface";
+import Candidate from "../interfaces/Candidate.interface";
 import { IoRemoveCircleSharp } from "react-icons/io5";
 import { MdAddCircle } from "react-icons/md";
+import "./CandidateCard.css";
 
 interface CandidateCardProps {
-  currentCandidate: Candidate;
-  addToSavedCandidateList?: (() => void) | null;
-  onSavedCandidatesList?: boolean | null;
-  getRandomCandidate?: (() => void) | null;
-  removeFromStorage?:
-    | ((
-        e: React.MouseEvent<SVGSVGElement, MouseEvent>,
-        currentlyOnCandidateList: boolean | null | undefined,
-        candidatName: string | null
-      ) => void)
-    | null;
+  currentCandidate: Candidate | null;
+  addToSavedCandidateList?: () => void;
+  getRandomCandidate?: () => void;
+  isSaved?: boolean;
 }
 
 const CandidateCard = ({
   currentCandidate,
   addToSavedCandidateList,
   getRandomCandidate,
+  isSaved = false,
 }: CandidateCardProps) => {
   return (
-    <>
-      {currentCandidate?.login ? (
-        <section className="currentCandidate">
-          <article className="details">
-            <div>
-              <div className="image-container">
+    <div className="candidate-card-wrapper">
+      <div className="candidate-card">
+        {currentCandidate ? (
+          <>
+            <div className="candidate-info">
+              <a
+                href={currentCandidate.html_url ?? ""}
+                target="_blank"
+                rel="noreferrer"
+              >
                 <img
+                  className="candidate-image"
                   src={currentCandidate.avatar_url ?? ""}
                   alt={`${currentCandidate.name}'s avatar`}
                 />
-              </div>
-              {currentCandidate.name} ({currentCandidate.login})<br />
-              Location: {currentCandidate.location}
-              <br />
-              Email:{" "}
-              <a href={`mailto:${currentCandidate.email}`}>
-                {currentCandidate.email}
               </a>
-              <br />
-              Company: {currentCandidate.company}
-              <br />
-              GitHub:{" "}
-              <a
-                href={currentCandidate.html_url ?? "#"}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {currentCandidate.html_url ?? "N/A"}
-              </a>
-              <br />
             </div>
-          </article>
+            <div className="candidate-details">
+              <h2>
+                {currentCandidate.login}{" "}
+                {currentCandidate.name ? `(${currentCandidate.name})` : ""}
+              </h2>
+              <p>Location: {currentCandidate.location ?? ""}</p>
+              <p>
+                Email:{" "}
+                {currentCandidate.email ? (
+                  <a href={`mailto:${currentCandidate.email}`}>
+                    {currentCandidate.email}
+                  </a>
+                ) : (
+                  ""
+                )}
+              </p>
+              <p>Company: {currentCandidate.company ?? ""}</p>
+              <p>Bio: {currentCandidate.bio ?? ""}</p>
+            </div>
+          </>
+        ) : (
+          <div className="none-remain">No more candidates are available</div>
+        )}
+      </div>
 
-          <article className="icons">
-            <div>
-              TODO: fix the logic - this is the only article that should appear
-            </div>
+      <div className="buttons-container">
+        {!isSaved && currentCandidate && (
+          <>
             <IoRemoveCircleSharp
-              color="red"
-              style={{ fontSize: "40px", cursor: "pointer" }}
+              className="search-button reject-button"
               onClick={() => getRandomCandidate?.()}
             />
             <MdAddCircle
-              color="green"
-              style={{ fontSize: "40px", cursor: "pointer" }}
+              className="search-button add-button"
               onClick={() => addToSavedCandidateList?.()}
             />
-          </article>
-        </section>
-      ) : (
-        <h2>Finding a candidate...</h2>
-      )}
-    </>
+          </>
+        )}
+      </div>
+    </div>
   );
 };
 

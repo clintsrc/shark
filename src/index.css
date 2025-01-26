@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap");
 
 :root {
-  font-family: 'Inter Tight', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Inter Tight", system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -33,9 +33,12 @@ body {
   background-repeat: no-repeat no-repeat;
   background-position: center center;
   margin: 0;
-  place-items: center;
+  /* this was inconsistently centering the navbar
+     removing it to make the behavior match the
+     spec's screenshots  */
+  /* place-items: center; */
   min-width: 320px;
-  min-height: 100vh;
+  min-height: 140vh;
 }
 
 h1 {
@@ -117,4 +120,43 @@ tbody tr:nth-child(odd) {
 .table {
   width: 80vw;
   table-layout: fixed;
+}
+.table td:nth-child(2) {
+  word-wrap: break-word; /* wrap  */
+  word-break: break-word;
+  white-space: normal;
+}
+.cell-graphic {
+  text-align: center;
+  vertical-align: middle;
+}
+
+
+.none-remain {
+  text-align: center;
+}
+
+/* search candidate page */
+.search-button {
+  font-size: 5rem;
+  cursor: pointer;
+  padding: 0 1rem;
+  position: absolute;
+}
+
+.reject-button {
+  color: red;
+  left: 0; /* left side of the card */
+}
+
+.add-button {
+  color: green;
+  right: 0; /* right side of the card */
+}
+
+/* saved candidate page */
+.delete-button {
+  font-size: 2.7rem;
+  cursor: pointer;
+  color: red;
 }

@@ -1,0 +1,52 @@
+.candidate-card-wrapper {
+  position: relative;
+  width: 270px;
+  height: 480px;
+}
+
+.candidate-card {
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+}
+
+.candidate-info {
+  width: 100%;
+  height: 50%; /* image uses the top half of container */
+  position: relative;
+}
+
+.candidate-image {
+  width: 100%; /* use full width */
+  height: 100%; /* match width to make it square */
+  object-fit: cover; /* prevent distortion */
+}
+
+.candidate-details {
+  padding: 1rem;
+  text-align: left;
+  height: 50%; /* use bottom half of container */
+  background-color: black;
+  color: white;
+  overflow-y: auto; /* scroll for long text */
+}
+
+.candidate-details h2 {
+  margin: 0 0 10px;
+  font-size: 1.2em;
+}
+
+.candidate-details p {
+  margin: 10px 0;
+}
+
+.buttons-container {
+  position: absolute;
+  bottom: -30px; /* buttons appear outside of the card */
+  width: 100%;
+  display: flex;
+}
