@@ -33,7 +33,10 @@ body {
   background-repeat: no-repeat no-repeat;
   background-position: center center;
   margin: 0;
-  place-items: center;
+  /* this was inconsistently centering the navbar
+     removing it to make the behavior match the
+     spec's screenshots  */
+  /* place-items: center; */
   min-width: 320px;
   min-height: 100vh;
 }
