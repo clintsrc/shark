@@ -57,11 +57,11 @@ const CandidateCard = ({
         {!isSaved && currentCandidate && (
           <>
             <IoRemoveCircleSharp
-              className="reject-button"
+              className="search-button reject-button"
               onClick={() => getRandomCandidate?.()}
             />
             <MdAddCircle
-              className="add-button"
+              className="search-button add-button"
               onClick={() => addToSavedCandidateList?.()}
             />
           </>
