@@ -123,15 +123,38 @@ tbody tr:nth-child(odd) {
   word-break: break-word;
   white-space: normal;
 }
+.cell-graphic {
+  text-align: center;
+  vertical-align: middle;
+}
 
-/* React icon button styling */
-.button-icon {
-  font-size: 2rem;
-  cursor: pointer;
+
+.none-remain {
+  text-align: center;
 }
+
+/* search candidate page */
 .reject-button {
+  font-size: 5rem;
+  cursor: pointer;
   color: red;
+  padding: 0 1rem;
+  position: absolute;
+  left: 0; /* left side of the card */
 }
+
 .add-button {
+  font-size: 5rem;
+  cursor: pointer;
   color: green;
+  padding: 0 1rem;
+  position: absolute;
+  right: 0; /* right side of the card */
+}
+
+/* saved candidate page */
+.delete-button {
+  font-size: 2.7rem;
+  cursor: pointer;
+  color: red;
 }

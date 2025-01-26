@@ -83,7 +83,7 @@ const SavedCandidatesList = () => {
       )}
 
       {sortedCandidates.length === 0 ? (
-        <p>There are no potential candidates.</p>
+        <div className="none-remain">There are no potential candidates.</div>
       ) : (
         <table className="table">
           <thead>
@@ -101,7 +101,7 @@ const SavedCandidatesList = () => {
           <tbody>
             {sortedCandidates.map((candidate) => (
               <tr key={candidate.login}>
-                <td>
+                <td className="cell-graphic">
                   <img
                     src={candidate.avatar_url ?? ""}
                     alt={`${candidate.name}'s avatar`}
@@ -126,9 +126,9 @@ const SavedCandidatesList = () => {
                 </td>
                 <td>{candidate.company ?? "N/A"}</td>
                 <td>{candidate.bio ?? "N/A"}</td>
-                <td>
+                <td className="cell-graphic">
                   <IoRemoveCircleSharp
-                    className="button-icon reject-button"
+                    className="delete-button"
                     onClick={() => removeCandidate(candidate)}
                   />
                 </td>
