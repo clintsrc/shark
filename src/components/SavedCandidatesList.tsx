@@ -7,6 +7,25 @@ import { FaSortAmountUp, FaSortAmountDown } from "react-icons/fa";
 
 import "./SavedCandidatesList.css";
 
+/*
+ * SavedCandidatesList
+ *
+ * Displays the selected candidates from localStorage or else a message indicating
+ * there are no matching candidates. The data is retrieved using the GitHub API during 
+ * the search and also saved to localStorage when selected. Here those saved candidates 
+ * are read from localStorage in json format and listed in a table. Ther user can 
+ * delete candidates from the list which also deletes the record from localStorage.
+ * 
+ * Provides a sort order option on the list.
+ * 
+ * Provides a filter to help find specific skills the candidate may have provided
+ * in their bio. 
+ *
+ * NOTE: a future improvement will be to make repeat API queries in order to
+ * Fill a temporary list of selectable candidates that have a bio and email
+ * at minimum rather than using the batch the api returns 'as is'.
+ *
+ */
 const SavedCandidatesList = () => {
   const [savedCandidates, setSavedCandidates] = useState<Candidate[]>([]);
   const [sortedCandidates, setSortedCandidates] = useState<Candidate[]>([]);
@@ -51,9 +70,14 @@ const SavedCandidatesList = () => {
    */
   const sortCandidates = useCallback(
     (order: "asc" | "desc") => {
-      const filteredCandidates = savedCandidates.filter((candidate) =>
-        candidate.bio?.toLowerCase().includes(filterText.toLowerCase())
-      );
+      const filteredCandidates = savedCandidates.filter((candidate) => {
+        // See the note in the component's comment at the top  of the file
+        // When the bio filter input is empty continue to list chosen candidates without bios
+        if (filterText === "") {
+          return true;
+        }
+        return candidate.bio?.toLowerCase().includes(filterText.toLowerCase());
+      });
 
       const sortedArray = [...filteredCandidates];
       sortedArray.sort((a, b) => {
@@ -72,8 +96,7 @@ const SavedCandidatesList = () => {
 
   return (
     <div>
-      
-      {savedCandidates.length > 0 && sortedCandidates.length > 0 && (
+      {savedCandidates.length > 0 && (
         <div className="controls-container">
           <div>
             <label htmlFor="bio-filter">Filter on bio: </label>
