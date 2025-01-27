@@ -3,12 +3,33 @@ import { IoRemoveCircleSharp } from "react-icons/io5";
 import { MdAddCircle } from "react-icons/md";
 import "./CandidateCard.css";
 
+/*
+ * CandidateCardProps interface
+ *
+ * Define the shape of the properties passed into CandidateCard. It has a Candidate 
+ * interface that defines the shape of the data we're interested in from the GitHub
+ * API. It also needs the parent properties that handle saving and rejecting candidates
+ * and tracking whether the candidate has been flagged as saved.
+ * 
+ */
 interface CandidateCardProps {
   currentCandidate: Candidate | null;
   addToSavedCandidateList?: () => void;
   getRandomCandidate?: () => void;
   isSaved?: boolean;
 }
+
+/*
+ * CandidateCard component
+ *
+ * Displays details of a GitHub user as a potential candidate for hire. Provides the 
+ * UI controls to reject the current candidate and advance to the next, or else to add 
+ * them to localStorage to track in a list of other selected candidates.
+ * 
+ * When there are no more candidates to choose from, replacd the candidate UI with a 
+ * simple message that no more candidates are available
+ *
+ */
 
 const CandidateCard = ({
   currentCandidate,

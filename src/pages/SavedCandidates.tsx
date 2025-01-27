@@ -1,8 +1,10 @@
 import SavedCandidatesList from "../components/SavedCandidatesList";
 
 /* 
- * seperation of concerns: delegates the bulk of the work to the 
- * SavedCandidatesList component
+ * SavedCandidates
+ * 
+ * The bulk of the work is in the SavedCandidatesList component for seperation of 
+ * concerns
  * 
  */
 const SavedCandidates = () => {
