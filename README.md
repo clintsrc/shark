@@ -45,7 +45,9 @@ If you are fixing a bug, please include a test to verify the fix.
 Thank you for your contributions!
 Here are some helpful resources:  
 [![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/)  
+![GitHub API](https://img.shields.io/badge/Uses-GitHub%20API-blue?logo=github)  
 [![Render](https://img.shields.io/badge/Render-CI/CD-blue)](https://dashboard.render.com/web/srv-cu83ke3v2p9s73c772n0)  
+[![Icon Duck](https://img.shields.io/badge/Icon%20Duck-Open%20Source%20Icons-yellow)](https://iconduck.com/icons/197869/shark)
 
 
 ## Tests

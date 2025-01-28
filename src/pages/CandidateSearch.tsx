@@ -5,7 +5,6 @@ import CandidateCard from "../components/CandidateCard";
 
 /*
  * CandidateSearch component
- * TODO: yes, this is a component, not a page, refactor!
  *
  * This component manages the Candidate Search (home) page to fetch a list
  * of candidates to hire from GitHub using the GitHub API. It grabs a raw list of
