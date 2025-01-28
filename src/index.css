@@ -38,7 +38,9 @@ body {
      spec's screenshots  */
   /* place-items: center; */
   min-width: 320px;
-  min-height: 140vh;
+  /* provide room for the buttons at the bottom 
+   * of the page */
+  min-height: 130vh;
 }
 
 h1 {
@@ -87,10 +89,20 @@ main {
   align-items: center;
 }
 
+/* Candidates list */
 tr {
   border-radius: 10px;
   background-color: #000;
   color: white;
+}
+
+td {
+  vertical-align: middle;
+  padding: 0.5em;
+}
+
+tr .graphic-cell {
+  text-align: center;
 }
 
 tbody tr:nth-child(odd) {
@@ -121,22 +133,16 @@ tbody tr:nth-child(odd) {
   width: 80vw;
   table-layout: fixed;
 }
-.table td:nth-child(2) {
-  word-wrap: break-word; /* wrap  */
-  word-break: break-word;
-  white-space: normal;
-}
-.cell-graphic {
-  text-align: center;
-  vertical-align: middle;
-}
 
-
+/* center the 'no more candidates' message */
 .none-remain {
   text-align: center;
 }
 
+/* Buttons */
+
 /* search candidate page */
+/* common button properties */
 .search-button {
   font-size: 5rem;
   cursor: pointer;
